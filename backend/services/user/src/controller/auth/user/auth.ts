@@ -3,7 +3,6 @@ import type { Request, Response } from "express";
 import redis from "../../../util/redis.js";
 import argon2 from 'argon2';
 import { sendEmail } from "../../../helper/sendEmail.js";
-import { emailQueue } from "../../../queue/email.queue.js";
 import { createToken } from "../../../helper/mangeToken.js";
 import mongoose from "mongoose";
 
