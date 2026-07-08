@@ -14,12 +14,25 @@ const USER_SERVICE_URL = process.env.USER_SERVICE_URL || 'http://localhost:3001'
 const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL || 'http://localhost:3002';
 const ORDER_SERVICE_URL = process.env.ORDER_SERVICE_URL || 'http://localhost:3003';
 
-const allowOrgin = process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : ["http://localhost:5173"]
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  "http://localhost:5173",
+].filter(Boolean);
 
-app.use(cors({
-  origin:allowOrgin,
-  credentials: true
-}));
+app.use(
+  cors({
+    origin(origin, callback) {
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error(`Origin ${origin} not allowed by CORS`));
+    },
+    credentials: true,
+  })
+);
 
 app.use(
   "/api/v1/user",
