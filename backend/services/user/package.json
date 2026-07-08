@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/server.js",
     "dev": "tsc-watch --OnSuccess \"node dist/server.js\"",
-    "build": "npm install && tsc",
+    "build": "tsc",
     "email_worker": "node -r dotenv/config dist/worker/email.worker.js"
   },
   "keywords": [],
