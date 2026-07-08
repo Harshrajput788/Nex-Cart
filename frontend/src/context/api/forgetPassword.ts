@@ -4,7 +4,7 @@ import type { ResetPasswordInput, SendForgetFormData } from "../../schema/auth.s
 import { backendUrl } from "./url";
 
 export const sendForgetPassword = createAsyncThunk("sendForgetPassword",async (email:SendForgetFormData) =>{
-    const data = await fetch("/api/v1/user/auth/send-reset-password-code",{
+    const data = await fetch(backendUrl+"/api/v1/user/auth/send-reset-password-code",{
         method:"POST",
         headers:{
             'Content-Type':"application/json"
