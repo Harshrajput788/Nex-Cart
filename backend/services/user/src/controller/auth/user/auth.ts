@@ -3,9 +3,6 @@ import type { Request, Response } from "express";
 import redis from "../../../util/redis.js";
 import argon2 from 'argon2';
 import { sendEmail } from "../../../helper/sendEmail.js";
-<<<<<<< HEAD
-=======
-import { emailQueue } from "../../../queue/email.queue.js";
 import { createToken } from "../../../helper/mangeToken.js";
 import mongoose from "mongoose";
 
@@ -82,11 +79,7 @@ export const login = async (req: Request, res: Response) => {
     }
 
     const token = createToken(user);
-<<<<<<< HEAD
-
-=======
     
->>>>>>> 3e956ce (Initial commit)
     user.lastLoginAt = new Date();
     await user.save();
 
@@ -155,11 +148,8 @@ export const sendEmailVerifictionCode = async (req: Request, res: Response) => {
         "EX",
         5 * 60
     );
-<<<<<<< HEAD
 
-=======
     
->>>>>>> 3e956ce (Initial commit)
     await sendEmail({
         to: user.email,
         subject: "Email Verification Code",
