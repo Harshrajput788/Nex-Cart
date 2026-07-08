@@ -38,9 +38,9 @@ export const regiseter = async (req: Request, res: Response) => {
 
     res.cookie("token", token, {
         httpOnly: true,
-        secure: false,
-        sameSite: "lax",
-        maxAge: 7 * 24 * 60 * 60 * 1000
+        secure: true,
+        sameSite: "none",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
     }).status(201).json({
         message: "User create successfully",
         success: true,
@@ -85,9 +85,9 @@ export const login = async (req: Request, res: Response) => {
 
     res.cookie("token", token, {
         httpOnly: true,
-        secure: false,
-        sameSite: "lax",
-        maxAge: 7 * 24 * 60 * 60 * 1000
+        secure: true,
+        sameSite: "none",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
     }).status(200).json({
         success: true,
         message: "user login successfully",
@@ -216,10 +216,10 @@ export const verifyEmail = async (req: Request, res: Response) => {
 
     return res
         .cookie("token", token, {
-            httpOnly: true,
-            secure: false,
-            sameSite: "lax",
-            maxAge: 7 * 24 * 60 * 60 * 1000
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
         })
         .status(200)
         .json({
