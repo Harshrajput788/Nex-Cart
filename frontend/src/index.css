@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+body{
+    width: 100%;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    font-family: 'Roboto';
+    justify-content: center;
+}
+
+#root{
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.color{
+    background: rgba(255, 255, 255, 0.432);
+}

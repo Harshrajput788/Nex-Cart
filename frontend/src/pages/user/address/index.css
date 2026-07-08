@@ -1,0 +1,19 @@
+.color{
+    background: rgba(255, 255, 255, 0.493);
+}
+
+.animationPop{
+    animation: topTobottom;
+    animation-duration: 500ms; 
+}
+
+@keyframes topTobottom {
+    0%{
+        margin-top: -100px;
+        opacity: 0;
+    }
+    100%{
+        margin-top: 0px;
+        opacity: 1;
+    }
+}
