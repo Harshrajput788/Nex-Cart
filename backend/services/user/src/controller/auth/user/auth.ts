@@ -2,6 +2,7 @@ import UserModel, { type IUser } from "../../../model/user.js";
 import type { Request, Response } from "express";
 import redis from "../../../util/redis.js";
 import argon2 from 'argon2';
+import { sendEmail } from "../../../helper/sendEmail.js";
 import { emailQueue } from "../../../queue/email.queue.js";
 import { createToken } from "../../../helper/mangeToken.js";
 import mongoose from "mongoose";
@@ -35,12 +36,6 @@ export const regiseter = async (req: Request, res: Response) => {
     await newUser.save();
 
     const token = createToken(newUser);
-
-    await emailQueue.add("welcome-email", {
-        to: newUser.email,
-        subject: "Welcome",
-        html: "Welcome to our shop"
-    });
 
 
     res.cookie("token", token, {
@@ -86,12 +81,6 @@ export const login = async (req: Request, res: Response) => {
     }
 
     const token = createToken(user);
-
-    await emailQueue.add("login-email", {
-        to: user.email,
-        subject: "Welcome back to our shop",
-        html: "<p>Welcome back to our shop</p>"
-    });
 
     user.lastLoginAt = new Date();
     await user.save();
@@ -162,11 +151,11 @@ export const sendEmailVerifictionCode = async (req: Request, res: Response) => {
         5 * 60
     );
 
-    await emailQueue.add("sendVerificationEmail", {
+    await sendEmail({
         to: user.email,
         subject: "Email Verification Code",
         html: `<p>Your verification code is <b>${code}</b></p>`
-    });
+    })
 
 
     return res.status(200).json({
@@ -268,11 +257,12 @@ export const sendResetPasswordCode = async (req: Request, res: Response) => {
         5 * 60
     );
 
-    await emailQueue.add("sendResetPasswordEmail", {
+    await sendEmail({
         to: email,
         subject: "Reset Password Code",
         html: `<p>Your reset password code is <b>${code}</b>. It expires in 5 minutes.</p>`
-    });
+    })
+
 
     return res.status(200).json({
         success: true,
