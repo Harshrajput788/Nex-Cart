@@ -28,7 +28,9 @@ app.use(cors({
       }
 
       return callback(new Error(`Origin ${origin} not allowed by CORS`));
-  
+    },
+    credentials: true,
+}));
 app.use(cookieParser());
 
 app.get("/health", (_, res) => {
