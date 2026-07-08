@@ -36,7 +36,6 @@ export const regiseter = async (req: Request, res: Response) => {
 
     const token = createToken(newUser);
 
-
     res.cookie("token", token, {
         httpOnly: true,
         secure: false,
@@ -261,7 +260,6 @@ export const sendResetPasswordCode = async (req: Request, res: Response) => {
         subject: "Reset Password Code",
         html: `<p>Your reset password code is <b>${code}</b>. It expires in 5 minutes.</p>`
     })
-
 
     return res.status(200).json({
         success: true,
