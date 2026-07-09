@@ -72,6 +72,13 @@ export const getOrderById = async (req: Request, res: Response) => {
   const userId = req.user.userId;
   const { orderId } = req.params;
 
+  if(!mongoose.Types.ObjectId.isValid(orderId as string)){
+    return res.status(400).json({
+      success: false,
+      message: "Invaild mongoose Id",
+    });
+  }
+
   const cacheKey = ORDER_CACHE_KEYS.ORDER_DETAIL(orderId as string, userId);
 
   const cached = await getCache(cacheKey);
