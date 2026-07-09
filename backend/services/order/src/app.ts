@@ -33,14 +33,6 @@ app.use(cors({
 }));
 app.use(cookieParser());
 
-app.get("/health", (_, res) => {
-    res.status(200).json({
-        success: true,
-        status: "UP",
-        timestamp: new Date().toISOString()
-    });
-});
-
 app.use("/", userOrderRouter);
 app.use("/seller", sellerOrderRouter);
 app.use("/admin", adminOrderRouter);
