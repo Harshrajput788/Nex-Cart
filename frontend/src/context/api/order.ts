@@ -11,7 +11,7 @@ export const useMyOrders = (query:any) =>{
     return useQuery<APIRespone>({
         queryKey:["myOrder",query],
         queryFn:async () =>{
-            const res = await axios.get<APIRespone>(backendUrl+"/api/v1/order/my-orders",{withCredentials:true});
+            const res = await axios.get<APIRespone>(backendUrl+"/api/v1/order/all/my-orders",{withCredentials:true});
             return res.data;
         },
         placeholderData:keepPreviousData
