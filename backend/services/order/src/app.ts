@@ -9,7 +9,7 @@ import adminOrderRouter from './routes/order/admin/admin.routes.js'
 
 const app = express();
 
-constconst allowOrigin =  [
+const allowOrigin =  [
   process.env.FRONTEND_URL,
   "http://localhost:5173",
 ].filter(Boolean);
