@@ -141,7 +141,6 @@ The project focuses on production-level backend architecture, authentication, ca
 
 ## DevOps
 
-- Docker
 - GitHub
 - Vercel
 - Render
