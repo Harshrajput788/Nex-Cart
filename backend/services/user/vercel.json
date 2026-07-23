@@ -1,4 +1,5 @@
 {
+  "version": 2,
   "functions": {
     "src/index.ts": {
       "runtime": "@vercel/node"
@@ -7,7 +8,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "src/server.ts"
+      "dest": "src/index.ts"
     }
   ]
 }
