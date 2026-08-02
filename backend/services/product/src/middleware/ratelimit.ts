@@ -17,7 +17,7 @@ export const redisRateLimit =
     useUserId = false
   }: RateLimitOptions) =>
   async (req: Request, res: Response, next: NextFunction) => {
-    const identifier = useUserId && req.user?.userId ? req.user.userId : req.ip;
+    const identifier =  req.ip;
     const key = `${prefix}:${identifier}`;
 
     const currentCount = await redis.incr(key);
