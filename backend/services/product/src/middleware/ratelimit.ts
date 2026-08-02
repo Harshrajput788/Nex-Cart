@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
-import redis from "../config/redis.js";
+import redis from "../config/redis.js"
 
 interface RateLimitOptions {
   windowSec: number;   
@@ -17,7 +17,7 @@ export const redisRateLimit =
     useUserId = false
   }: RateLimitOptions) =>
   async (req: Request, res: Response, next: NextFunction) => {
-    const identifier =  req.ip;
+    const identifier = useUserId && req.user?.userId ? req.user.userId : req.ip;
     const key = `${prefix}:${identifier}`;
 
     const currentCount = await redis.incr(key);
