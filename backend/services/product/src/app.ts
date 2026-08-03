@@ -33,6 +33,7 @@ app.get("/health", (_, res) => {
     res.status(200).json({
         success: true,
         status: "UP",
+        message:"Done"
         timestamp: new Date().toISOString()
     });
 });
