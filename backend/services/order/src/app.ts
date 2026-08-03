@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import userOrderRouter from './routes/order/user/user.routes.js';
 import sellerOrderRouter from './routes/order/seller/seller.routes.js';
 import paymentRouter from "./routes/paymet/payment.routes.js"
+import { connectDatabase } from "./config/db.js";
 import adminOrderRouter from './routes/order/admin/admin.routes.js'
 
 const app = express();
@@ -14,7 +15,10 @@ const allowOrigin =  [
   "http://localhost:5173",
 ].filter(Boolean);
 
-
+app.use(async(req,res,next)=>{
+  await connectDatabase();
+  next();
+})
 
 app.use(helmet());
 app.use(express.json({ limit: "10kb" }));
