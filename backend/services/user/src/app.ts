@@ -17,7 +17,10 @@ const allowOrigin =  [
 ].filter(Boolean);
 
 
-connectDatabase();
+app.use(async (req,res,next)=>{
+ await connectDatabase();
+ next();
+})
 
 app.use(helmet());
 app.use(express.json({ limit: "10kb" }));
