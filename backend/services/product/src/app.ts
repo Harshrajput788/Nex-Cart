@@ -36,6 +36,7 @@ app.use(cookieParser());
 app.get("/health", (_, res) => {
     res.status(200).json({
         success: true,
+        allowedOrigins: allowedOrigins,
         status: "UP",
         timestamp: new Date().toISOString()
     });
