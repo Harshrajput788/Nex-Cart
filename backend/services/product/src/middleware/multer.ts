@@ -13,17 +13,3 @@ export const upload = multer({
     cb(null, true);
   },
 });
-
-
-const storage = multer.diskStorage({
-  destination: "uploads/",
-  filename: (_req, file, cb) => {
-    const safeName = file.originalname
-      .replace(/[^a-zA-Z0-9.-]/g, "")
-      .toLowerCase();
-
-    cb(null, `${Date.now()}-${safeName}`);
-  },
-});
-
-export const uploadSingle = multer({ storage });
