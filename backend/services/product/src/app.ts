@@ -40,7 +40,7 @@ app.use(cors({
       if (allowOrigin.includes(origin)) {
         return callback(null, true);
       }
-      return callback(new Error(`Origin ${origin} not allowed by CORS`+ allowOrigin));
+      return callback(new Error(`Origin ${origin} not allowed by CORS ${process.env.FRONTEND_URL}`));
     },
     credentials: true,
 }));
