@@ -12,6 +12,7 @@ import sellerVariantRouter from './routes/variant/seller/seller.routes.js'
 import cartRouter from './routes/cart/user/user.routes.js'
 import adminThumbnailRouter from "./routes/thumbnail/admin/admin.routes.js"
 import userThumbnailRouter from "./routes/thumbnail/user/user.routes.js"
+import { connectDatabase } from "./config/db.js";
 import adminCartRouter from './routes/cart/admin/admin.routes.js'
 
 const app = express();
@@ -20,6 +21,12 @@ const allowedOrigins = [
   process.env.FRONTEND_URL,
   "http://localhost:5173",
 ].filter(Boolean);
+
+
+app.use(async (req,res,next)=>{
+ await connectDatabase();
+ next();
+})
 
 app.use(helmet());
 app.use(express.json({ limit: "20mb" }));
