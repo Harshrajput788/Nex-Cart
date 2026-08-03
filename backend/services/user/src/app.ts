@@ -6,6 +6,7 @@ import authUserRouter from './routes/auth/user/user.routes.js'
 import addressUserRouter from './routes/address/user.routes.js'
 import userProfileRouter from './routes/profile/user/user.routes.js';
 import adminProfileRouter from './routes/profile/admin/admin.routes.js'
+import { connectDatabase } from "./util/db.js";
 import adminSellerProfileRouter from "./routes/profile/admin/adminSeller.routes.js"
 
 const app = express();
@@ -15,6 +16,8 @@ const allowOrigin =  [
   "http://localhost:5173",
 ].filter(Boolean);
 
+
+connectDatabase();
 
 app.use(helmet());
 app.use(express.json({ limit: "10kb" }));
