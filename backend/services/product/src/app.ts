@@ -20,11 +20,7 @@ config();
 
 const app = express();
 
-const allowedOrigins = [
-  process.env.FRONTEND_URL,
-  "http://localhost:5173",
-].filter(Boolean);
-
+const allowedOrigins = process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : ["http://localhost:5173"];
 
 app.use(async (req,res,next)=>{
  await connectDatabase();
@@ -34,7 +30,7 @@ app.use(async (req,res,next)=>{
 app.use(helmet());
 app.use(express.json({ limit: "20mb" }));
 app.use(express.urlencoded({ extended: true, limit: "20mb" }));
-
+app.use(cors({ credentials: true, origin: allowedOrigins }));
 app.use(cookieParser());
 
 app.get("/health", (_, res) => {
