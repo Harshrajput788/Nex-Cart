@@ -22,7 +22,7 @@ export const connectDatabase = async (): Promise<void> => {
   } catch (error) {
     isConnected = false;
     console.error("❌ MongoDB connection failed:", error);
-    process.exit(1); 
+    throw error;
   }
   
 };
