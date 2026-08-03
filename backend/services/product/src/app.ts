@@ -14,6 +14,9 @@ import adminThumbnailRouter from "./routes/thumbnail/admin/admin.routes.js"
 import userThumbnailRouter from "./routes/thumbnail/user/user.routes.js"
 import { connectDatabase } from "./config/db.js";
 import adminCartRouter from './routes/cart/admin/admin.routes.js'
+import { config } from "dotenv";
+
+config();
 
 const app = express();
 
