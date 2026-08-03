@@ -7,6 +7,9 @@ import sellerOrderRouter from './routes/order/seller/seller.routes.js';
 import paymentRouter from "./routes/paymet/payment.routes.js"
 import { connectDatabase } from "./config/db.js";
 import adminOrderRouter from './routes/order/admin/admin.routes.js'
+import { config } from "dotenv";
+
+config();
 
 const app = express();
 
