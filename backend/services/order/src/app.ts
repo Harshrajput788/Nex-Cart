@@ -46,7 +46,7 @@ app.use("/admin", adminOrderRouter);
 
 app.use("/payment", paymentRouter);
 
-app.get("/health", (_, res) => {
+app.get("/check/health", (_, res) => {
     res.status(200).json({
         success: true,
         status: "UP",
