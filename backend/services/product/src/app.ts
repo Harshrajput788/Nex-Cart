@@ -13,6 +13,7 @@ import cartRouter from './routes/cart/user/user.routes.js'
 import adminThumbnailRouter from "./routes/thumbnail/admin/admin.routes.js"
 import userThumbnailRouter from "./routes/thumbnail/user/user.routes.js"
 import adminCartRouter from './routes/cart/admin/admin.routes.js'
+import { connectDatabase } from './config/db.js';
 
 
 const app = express();
@@ -24,6 +25,10 @@ app.use(express.json({ limit: "20mb" }));
 app.use(express.urlencoded({ extended: true, limit: "20mb" }));
 app.use(cors({ credentials: true, origin: allowedOrigins }));
 app.use(cookieParser());
+app.use(async (req,res,next)=>{
+ await connectDatabase();
+ next();
+})
 
 app.get("/health", (_, res) => {
     console.log(allowedOrigins)
