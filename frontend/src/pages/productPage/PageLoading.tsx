@@ -1,92 +1,80 @@
-import "./index.css"
+const Bar = ({ className = "" }: { className?: string }) => (
+  <div className={`animate-pulse rounded-lg bg-gray-200/80 ${className}`} />
+);
 
 const ProductSkeleton = () => {
   return (
-    <div className="min-h-screen">
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-14">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-start">
+    <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-10" aria-busy="true" aria-label="Loading product">
+      {/* Breadcrumb */}
+      <Bar className="mb-6 h-4 w-56" />
 
-          <div className="lg:sticky lg:top-20">
-            <div className="aspect-square rounded-2xl skeleton border border-gray-200" />
-
-            <div className="flex gap-2.5 px-5 py-3 mt-3">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl skeleton border border-gray-200"
-                />
-              ))}
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-6">
-
-            <div>
-              <div className="h-3 w-24 mb-3 skeleton rounded" />
-              <div className="h-9 w-3/4 skeleton rounded mb-2" />
-              <div className="h-4 w-full skeleton rounded" />
-              <div className="h-4 w-5/6 skeleton rounded mt-2" />
-            </div>
-
-            <div className="flex gap-2">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <div key={i} className="w-5 h-5 rounded skeleton" />
-              ))}
-              <div className="h-4 w-16 skeleton rounded ml-2" />
-            </div>
-
-            <hr className="border-gray-200" />
-
-            <div className="flex items-end gap-3">
-              <div className="h-10 w-32 skeleton rounded" />
-              <div className="h-6 w-20 skeleton rounded" />
-            </div>
-
-            <div className="h-6 w-40 skeleton rounded" />
-
-            <hr className="border-gray-200" />
-
-            <div className="flex items-center gap-3">
-              <div className="h-4 w-12 skeleton rounded" />
-              <div className="h-10 w-28 skeleton rounded-xl" />
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-3">
-              <div className="h-12 flex-1 skeleton rounded-xl" />
-              <div className="h-12 flex-1 skeleton rounded-xl" />
-            </div>
-
-            <hr className="border-gray-200" />
-
-            <div className="flex gap-4">
-              {Array.from({ length: 3 }).map((_, i) => (
-                <div key={i} className="h-4 w-20 skeleton rounded" />
-              ))}
-            </div>
-
-            <div className="space-y-3 pt-3">
-              <div className="h-4 w-full skeleton rounded" />
-              <div className="h-4 w-11/12 skeleton rounded" />
-              <div className="h-4 w-10/12 skeleton rounded" />
-            </div>
-
-            <div className="grid grid-cols-3 gap-2.5 pt-4">
-              {Array.from({ length: 3 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="h-20 rounded-xl skeleton border border-gray-200"
-                />
-              ))}
-            </div>
-
+      <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-14">
+        {/* Gallery */}
+        <div className="lg:sticky lg:top-24">
+          <Bar className="aspect-square w-full !rounded-3xl" />
+          <div className="mt-4 flex gap-3 p-1">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <Bar key={i} className="h-16 w-16 shrink-0 !rounded-xl sm:h-20 sm:w-20" />
+            ))}
           </div>
         </div>
-      </main>
 
-      <footer className="border-t border-zinc-900 mt-16 py-6 text-center">
-        <div className="h-3 w-40 mx-auto skeleton rounded" />
-      </footer>
-    </div>
+        {/* Info */}
+        <div className="flex flex-col gap-6">
+          <div>
+            <Bar className="mb-3 h-4 w-24" />
+            <Bar className="mb-2 h-10 w-3/4" />
+            <Bar className="h-4 w-full" />
+            <Bar className="mt-2 h-4 w-5/6" />
+          </div>
+
+          <Bar className="h-5 w-40" />
+
+          <div className="flex items-end gap-3 border-y border-gray-100 py-5">
+            <Bar className="h-10 w-36" />
+            <Bar className="h-6 w-20" />
+          </div>
+
+          <Bar className="h-7 w-36 !rounded-full" />
+
+          {/* Variants */}
+          <div>
+            <Bar className="mb-3 h-4 w-32" />
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Bar className="h-24 !rounded-2xl" />
+              <Bar className="h-24 !rounded-2xl" />
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <Bar className="h-4 w-16" />
+            <Bar className="h-10 w-32 !rounded-full" />
+          </div>
+
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Bar className="h-14 flex-1 !rounded-full" />
+            <Bar className="h-14 flex-1 !rounded-full" />
+          </div>
+
+          <div className="flex gap-8 border-b border-gray-200 pb-3">
+            <Bar className="h-4 w-24" />
+            <Bar className="h-4 w-16" />
+          </div>
+
+          <div className="space-y-3">
+            <Bar className="h-4 w-full" />
+            <Bar className="h-4 w-11/12" />
+            <Bar className="h-4 w-10/12" />
+          </div>
+
+          <div className="grid grid-cols-3 gap-3">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <Bar key={i} className="h-20 !rounded-xl" />
+            ))}
+          </div>
+        </div>
+      </div>
+    </main>
   );
 };
 

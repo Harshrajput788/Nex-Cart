@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
-import React, { useState } from 'react'
+import { Link } from "react-router-dom";
+import React from "react";
+import { FiArrowUpRight } from "react-icons/fi";
 
 interface props {
   _id: string;
@@ -10,63 +11,54 @@ interface props {
   shortDescription?: string;
 }
 
-const ProductCard: React.FC<props> = (product) => {
-
-  const [hovering, setHovering] = useState(false);
+const ProductCard: React.FC<props> = ({ _id, name, image, price, salePrice, shortDescription }) => {
+  // Only treat it as a sale when salePrice is a real, lower number
+  const onSale = !!salePrice && salePrice < price;
+  const current = onSale ? salePrice : price;
+  const discount = onSale ? Math.round(((price - salePrice!) / price) * 100) : 0;
 
   return (
-    <div
-      className="relative w-56 bg-white rounded-2xl my-5 overflow-hidden border border-stone-100 transition-all duration-300 cursor-pointer group"
-      style={{
-        transform: hovering ? "translateY(-6px)" : "translateY(0)",
-        boxShadow: hovering
-          ? "0 20px 40px -10px rgba(0,0,0,0.12)"
-          : "0 1px 3px rgba(0,0,0,0.05)",
-      }}
-      onMouseEnter={() => setHovering(true)}
-      onMouseLeave={() => setHovering(false)}
+    <Link
+      to={`/product/${_id}`}
+      className="group relative block w-full overflow-hidden rounded-2xl border border-gray-100 bg-white transition-all duration-300 hover:-translate-y-1.5 hover:border-gray-200 hover:shadow-2xl hover:shadow-gray-900/10 focus-visible:ring-2 focus-visible:ring-blue-500"
     >
-      <div className="relative h-56 bg-stone-50 overflow-hidden">
+      {/* Image */}
+      <div className="relative aspect-square overflow-hidden bg-gray-50">
         <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          src={image}
+          alt={name}
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
         />
+
+        {onSale && (
+          <span className="absolute left-3 top-3 rounded-full bg-emerald-500 px-2.5 py-1 text-[11px] font-semibold text-white shadow-sm">
+            {discount}% off
+          </span>
+        )}
+
+        {/* Slides up on hover (desktop); on touch the whole card is the link */}
+        <span className="absolute inset-x-3 bottom-3 hidden translate-y-4 items-center justify-center gap-1.5 rounded-xl bg-gray-900/90 py-2.5 text-sm font-medium text-white opacity-0 backdrop-blur transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 md:flex">
+          View details
+          <FiArrowUpRight />
+        </span>
       </div>
 
-      <div className="px-3.5 pt-3 h-36 pb-4">
-        <h3 className="text-[15px] text-stone-900 overflow-y-hidden leading-snug mb-2.5">
-          {product.name}
+      {/* Info */}
+      <div className="p-4">
+        <h3 className="line-clamp-1 font-medium text-gray-900 transition-colors group-hover:text-blue-600">
+          {name}
         </h3>
-        <p className="text-[10px] tracking-[0.08em] uppercase text-stone-400 mb-0.5 font-light">
-          {product.shortDescription}
-        </p>
-
-        <div className="flex items-baseline gap-2 mb-2">
-          <span className="text-lg text-stone-900">₹{product.salePrice}</span>
-          {product.price && (
-            <span className="text-xs text-stone-400 line-through font-light">
-              ₹{product.price}
-            </span>
-          )}
-          {product.price && (
-            <span className="text-[10px] text-emerald-600 font-medium ml-auto">
-              {Math.round(((product.price - (product.salePrice ? product.salePrice : 0)) / product.price) * 100)}% off
-            </span>
-          )}
+        {shortDescription && (
+          <p className="mt-1 line-clamp-1 text-sm text-gray-500">{shortDescription}</p>
+        )}
+        <div className="mt-3 flex items-baseline gap-2">
+          <span className="text-lg font-semibold text-gray-900">₹{current}</span>
+          {onSale && <span className="text-sm text-gray-400 line-through">₹{price}</span>}
         </div>
       </div>
-        <Link to={`/product/${product._id}`}><button
-          onClick={(e) => { e.stopPropagation() }}
-          className={`w-full h-10 rounded-lg bg-blue-500 cursor-pointer text-white text-[12px] font-medium transition-all duration-200 active:scale-[0.98]`}>
-          View details</button></Link>
-    </div>
+    </Link>
   );
-}
+};
 
 export default ProductCard;
-
-
-
-
-

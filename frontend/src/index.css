@@ -19,3 +19,103 @@ body{
 .color{
     background: rgba(255, 255, 255, 0.432);
 }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero entrance: one orchestrated sequence on page load */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
+}
+.animate-rise {
+  opacity: 0;
+  animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+/* Floating product cards in the hero */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-14px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+
+/* Infinite marquee strip */
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+.animate-marquee { animation: marquee 28s linear infinite; }
+.marquee:hover .animate-marquee { animation-play-state: paused; }
+
+/* Respect reduced-motion settings */
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .animate-rise { opacity: 1; transform: none; transition: none; animation: none; }
+  .animate-float, .animate-marquee { animation: none; }
+}
+
+/* Progress bar under the active hero thumbnail */
+@keyframes progress {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+.animate-progress { animation: progress 5s linear forwards; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-progress { animation: none; width: 100%; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero entrance: one orchestrated sequence on page load */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
+}
+.animate-rise {
+  opacity: 0;
+  animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+/* Floating product cards in the hero */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-14px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+
+/* Infinite marquee strip */
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+.animate-marquee { animation: marquee 28s linear infinite; }
+.marquee:hover .animate-marquee { animation-play-state: paused; }
+
+/* Respect reduced-motion settings */
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .animate-rise { opacity: 1; transform: none; transition: none; animation: none; }
+  .animate-float, .animate-marquee { animation: none; }
+}
+
+/* Progress bar under the active hero thumbnail */
+@keyframes progress {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+.animate-progress { animation: progress 5s linear forwards; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-progress { animation: none; width: 100%; }
+}
