@@ -1,6 +1,6 @@
 import express from 'express';
-import helmet from 'helmet';
 import cors from 'cors'
+import helmet from 'helmet';
 import adminCategoryRouter from './routes/category/admin/admin.routes.js';
 import userCategoryRouter from './routes/category/user/user.routes.js'
 import cookieParser from 'cookie-parser';
@@ -12,48 +12,24 @@ import sellerVariantRouter from './routes/variant/seller/seller.routes.js'
 import cartRouter from './routes/cart/user/user.routes.js'
 import adminThumbnailRouter from "./routes/thumbnail/admin/admin.routes.js"
 import userThumbnailRouter from "./routes/thumbnail/user/user.routes.js"
-import { connectDatabase } from "./config/db.js";
 import adminCartRouter from './routes/cart/admin/admin.routes.js'
-import { config } from "dotenv";
-
-config();
 
 const app = express();
 
-const allowOrigin =  [
-  process.env.FRONTEND_URL,
-  "http://localhost:5173",
-].filter(Boolean);
-
-
-
-app.use(async (req,res,next)=>{
- await connectDatabase();
- next();
-})
+const allowedOrigins = process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : ["http://localhost:5173"];
 
 app.use(helmet());
 app.use(express.json({ limit: "20mb" }));
 app.use(express.urlencoded({ extended: true, limit: "20mb" }));
-app.use(cors({
- origin(origin, callback) {
-      if (!origin) return callback(null, true);
-
-      if (allowOrigin.includes(origin)) {
-        return callback(null, true);
-      }
-
-      return callback(new Error(`Origin ${origin} not allowed by CORS`));
-    },
-    credentials: true,
-}));
+app.use(cors({ credentials: true, origin: allowedOrigins }));
 app.use(cookieParser());
 
 app.get("/health", (_, res) => {
+    console.log(allowedOrigins)
     res.status(200).json({
         success: true,
         status: "UP",
-        message:"Done"
+        allowedOrigins: allowedOrigins,
         timestamp: new Date().toISOString()
     });
 });
