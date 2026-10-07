@@ -14,6 +14,7 @@ import adminThumbnailRouter from "./routes/thumbnail/admin/admin.routes.js"
 import userThumbnailRouter from "./routes/thumbnail/user/user.routes.js"
 import adminCartRouter from './routes/cart/admin/admin.routes.js'
 
+
 const app = express();
 
 const allowedOrigins = process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : ["http://localhost:5173"];
