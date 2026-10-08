@@ -51,6 +51,4 @@ app.use(
 app.use('/api/v1/product', proxy(PRODUCT_SERVICE_URL));
 app.use('/api/v1/order', proxy(ORDER_SERVICE_URL));
 
-app.listen(PORT, () => {
-  console.log(`Proxy server is running on http://localhost:${PORT}`);
-});
+export default app;
