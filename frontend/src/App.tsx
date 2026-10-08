@@ -14,15 +14,14 @@ function App() {
 
   const dispatch = useAppDispatch();
 
-  const [loading,setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     dispatch(getProfile()).finally(() => setLoading(false));
   }, []);
 
-  if(loading) return (
+  if (loading) return (
     <>
-      <div className="w-full h-8 justify-center items-center flex bg-blue-500 text-white">It may take some time because all the services are hosted on Render's free tier.</div>
       <div className="w-full min-h-screen justify-center items-center flex">Loading...</div>
     </>
   )
